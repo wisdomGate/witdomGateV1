@@ -20,6 +20,8 @@
     <module>creditcard</module>
     <module>paypal</module>
     <module>search</module>
+    <module>gateway</module>
+    <module>discovery</module>
   </modules>
 
   <name>safinalproject</name>

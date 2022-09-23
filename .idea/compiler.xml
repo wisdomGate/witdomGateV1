@@ -6,17 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="question" />
+        <module name="chatroom" />
+        <module name="blog" />
+        <module name="creditcard" />
         <module name="notifcation" />
         <module name="bank" />
         <module name="search" />
-        <module name="question" />
         <module name="solution" />
-        <module name="chatroom" />
+        <module name="discovery" />
         <module name="payment" />
-        <module name="blog" />
-        <module name="creditcard" />
         <module name="paypal" />
         <module name="account" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
   </component>
