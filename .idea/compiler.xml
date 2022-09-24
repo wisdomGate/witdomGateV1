@@ -24,7 +24,6 @@
     <bytecodeTargetLevel>
       <module name="account" target="18" />
       <module name="bank" target="17" />
-      <module name="blog" target="17" />
       <module name="chatroom" target="18" />
       <module name="solution" target="17" />
     </bytecodeTargetLevel>

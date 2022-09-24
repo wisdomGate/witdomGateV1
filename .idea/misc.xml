@@ -17,7 +17,6 @@
       <set>
         <option value="$PROJECT_DIR$/account/pom.xml" />
         <option value="$PROJECT_DIR$/bank/pom.xml" />
-        <option value="$PROJECT_DIR$/blog/pom.xml" />
         <option value="$PROJECT_DIR$/chatroom/pom.xml" />
         <option value="$PROJECT_DIR$/solution/pom.xml" />
       </set>
