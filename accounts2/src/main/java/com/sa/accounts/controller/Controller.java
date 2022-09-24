@@ -2,6 +2,7 @@ package com.sa.accounts.controller;
 
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
+import com.sa.accounts.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -16,9 +17,10 @@ import java.util.List;
 //@RequiredArgsConstructor
 public class Controller {
     @Autowired
-    private AccountRepo repo;
+    private AccountService service;
     @Autowired
-    private MongoTemplate template;
+    private AccountRepo repo;
+
     @PostMapping("/add")
     public Accounts saveAccount(@RequestBody Accounts accounts){
         repo.findAccountsByEmail(accounts.getEmail()).ifPresentOrElse(a->{
@@ -31,25 +33,19 @@ public class Controller {
         return accounts;
     }
 
-    private Accounts useingTamplate(Accounts accounts) {
-        Query query=new Query();
-        query.addCriteria(Criteria.where("email").is(accounts.getEmail() ));
-        List<Accounts> accounts1=template.find(query,Accounts.class);
-        if(accounts1.size()>0){
-            System.out.println("email booked");
-            return null;
-        }
-        else
-            return repo.insert(accounts);
-    }
+
 
     @GetMapping("/get/{id}")
-    public Accounts getAccount(@PathVariable int id){
+    public Accounts getAccount(@PathVariable String id){
         return repo.findById(id).orElse(null);
     }
     @GetMapping("/all")
     public List<Accounts> getall(){
         return repo.findAll();
+    }
+    @PostMapping("/follow/{id}/{f}")
+    public String follow(@PathVariable String id, @PathVariable String f){
+        return service.follow(id,f);
     }
 
 }
