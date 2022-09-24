@@ -32,9 +32,6 @@ public class Controller {
         });
         return accounts;
     }
-
-
-
     @GetMapping("/get/{id}")
     public Accounts getAccount(@PathVariable String id){
         return repo.findById(id).orElse(null);
@@ -46,6 +43,14 @@ public class Controller {
     @PostMapping("/follow/{id}/{f}")
     public String follow(@PathVariable String id, @PathVariable String f){
         return service.follow(id,f);
+    }
+    @GetMapping("/authenticate/{username}/{password}")
+    public Boolean authenticate(@PathVariable String username,@PathVariable String password){
+        return service.authenticate(username,password);
+    }
+    @GetMapping("/getFollers/{id}")
+    public Integer getFollowers(@PathVariable String id){
+        return service.getnumberofFollowers(id);
     }
 
 }

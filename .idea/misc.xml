@@ -6,11 +6,20 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/accounts2/pom.xml" />
+        <option value="$PROJECT_DIR$/bank/pom.xml" />
+        <option value="$PROJECT_DIR$/blog/pom.xml" />
+        <option value="$PROJECT_DIR$/chat_room/pom.xml" />
+        <option value="$PROJECT_DIR$/question/pom.xml" />
+        <option value="$PROJECT_DIR$/solution/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/account/pom.xml" />
+        <option value="$PROJECT_DIR$/bank/pom.xml" />
+        <option value="$PROJECT_DIR$/blog/pom.xml" />
+        <option value="$PROJECT_DIR$/chatroom/pom.xml" />
+        <option value="$PROJECT_DIR$/solution/pom.xml" />
       </set>
     </option>
   </component>

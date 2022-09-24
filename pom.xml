@@ -14,7 +14,7 @@
     <module>question</module>
     <module>solution</module>
     <module>blog</module>
-    <module>chatroom</module>
+    <module>chat_room</module>
     <module>payment</module>
     <module>bank</module>
     <module>creditcard</module>

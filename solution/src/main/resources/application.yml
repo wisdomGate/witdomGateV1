@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Solution-service
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: SolutionDB
+server:
+  port: 8081

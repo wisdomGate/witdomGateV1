@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Question
+  data:
+    mongodb:
+      database: QuestionDB
+      host: localhost
+      port: 27017
+server:
+  port: 9090
