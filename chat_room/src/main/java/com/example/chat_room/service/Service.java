@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import java.util.Arrays;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -19,18 +20,30 @@ public class Service {
     private MessageRepo messageRepo;
     @Autowired
     private MongoTemplate template;
-    public void addConverstion(Conversation conversation){
-        conversationRepo.save(conversation);
+    public Conversation addConverstion(Conversation conversation){
+       return conversationRepo.save(conversation);
     }
-    private List<Conversation> getConversation(String id){
+    public List<Conversation> getConversation(String id){
         Query query=new Query();
         query.addCriteria(Criteria.where("members").in(id));
         return template.find(query,Conversation.class);
     }
-    private List<Message> getMessage(String id){
+    public List<Message> getMessage(String id){
         Query query=new Query();
         query.addCriteria(Criteria.where("con_id").is(id));
         return template.find(query,Message.class);
     }
-
+    public void deleteConversation(String user_id,String id){
+        Query query=new Query();
+        query.addCriteria(Criteria.where("members").in(Arrays.asList(user_id,id)));
+        Conversation conversation=template.findOne(query,Conversation.class);
+        assert conversation != null;
+        conversationRepo.delete(conversation);
+        query=new Query();
+        query.addCriteria(Criteria.where("con_id").is(conversation.getId()));
+        template.remove(query,Message.class);
+    }
+    public Message addMessage(Message message) {
+        return messageRepo.save(message);
+    }
 }
