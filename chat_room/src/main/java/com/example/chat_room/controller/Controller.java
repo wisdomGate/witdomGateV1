@@ -17,9 +17,9 @@ public class Controller {
     public List<Conversation> getAll(@PathVariable String user_id){
         return service.getConversation(user_id);
     }
-    @PostMapping("/getMessages/{user_id}")
-    public List<Message> getAllMessages(@PathVariable String user_id){
-        return service.getMessage(user_id);
+    @GetMapping("/getMessages/{conv_id}")
+    public List<Message> getAllMessages(@PathVariable String conv_id){
+        return service.getMessage(conv_id);
     }
     @PostMapping("/addConvesrsation")
     public Conversation addConversation(@RequestBody Conversation conversation){
@@ -29,7 +29,7 @@ public class Controller {
     public Message addMessage(@RequestBody Message message){
         return service.addMessage(message);
     }
-    @PostMapping("/delete/{user_id}/{id}")
+    @DeleteMapping("/delete/{user_id}/{id}")
     public void deleteConversation(@PathVariable String user_id,@PathVariable String id){
         service.deleteConversation(user_id,id);
     }

@@ -1,5 +1,6 @@
 package com.sa.accounts.service;
 
+import com.sa.accounts.Dto.Conversation;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,14 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -18,6 +24,9 @@ public class AccountService {
     private AccountRepo repo;
     @Autowired
     private MongoTemplate template;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     private String updatePassword(String email,String pass) {
         Query query=new Query();
@@ -56,15 +65,28 @@ public class AccountService {
         List<String> acc=new ArrayList<>();
         if(owner.getFollowings()!=null){
             acc=owner.getFollowings();
-            if(acc.contains(followed))
+            if(acc.contains(followed)){
+                restTemplate.delete("http://localhost:8083/delete/"+followed+"/"+follower);
                 acc.remove(followed);
-            else
+            }
+            else{
+                HttpHeaders headers = new HttpHeaders();
+                headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                Conversation conversation=new Conversation();
+                conversation.setMembers(Arrays.asList(follower,followed));
+
+                HttpEntity<Conversation> requestEntity =
+                        new HttpEntity<>(conversation, headers);
+                restTemplate.postForEntity("http://localhost:8083/addConvesrsation",requestEntity, Conversation.class);
                 acc.add(followed);
+            }
 
         }else{
             acc.add(followed);
         }
         owner.setFollowings(acc);
+
        repo.save(owner);
        query=new Query();
         query.addCriteria(Criteria.where("_id").is(followed));
