@@ -1,16 +1,17 @@
 package com.sa.accounts.service;
 
 import com.sa.accounts.Dto.Conversation;
+import com.sa.accounts.MailDTO;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -51,10 +52,26 @@ public class AccountService {
     }
     public Accounts save(Accounts accounts){
         Accounts acc=repo.findAccountsByEmail(accounts.getEmail()).orElse(null);
+       // System.out.println("here0"+ acc.getEmail());
         if(acc!=null){
-            return repo.save(accounts);
-        }else
             return null;
+        }else{
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            MailDTO mailDTO=new MailDTO();
+            mailDTO.setContent(" your account successfully created thank you for being member of WisdomGate");
+            mailDTO.setSubject("Account verification from WisdomGate \"don't  reply to this email!!\"");
+            mailDTO.setTo(accounts.getEmail());
+
+            HttpEntity<MailDTO> requestEntity =
+                    new HttpEntity<>(mailDTO, headers);
+            ResponseEntity<String> str;
+            str = restTemplate.postForEntity("http://localhost:8084/sendMail",requestEntity,String.class);
+            System.out.println(str);
+            return repo.save(accounts);
+        }
+
     }
     public String follow(String follower,String followed){
         Query query=new Query();

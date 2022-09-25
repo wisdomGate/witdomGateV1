@@ -23,14 +23,14 @@ public class Controller {
 
     @PostMapping("/add")
     public Accounts saveAccount(@RequestBody Accounts accounts){
-        repo.findAccountsByEmail(accounts.getEmail()).ifPresentOrElse(a->{
-            System.out.println("email already exist");
-
-        },()->{
-            System.out.println("inserted");
-            repo.insert(accounts);
-        });
-        return accounts;
+//        repo.findAccountsByEmail(accounts.getEmail()).ifPresentOrElse(a->{
+//            System.out.println("email already exist");
+//
+//        },()->{
+//            System.out.println("inserted");
+//            repo.insert(accounts);
+//        });
+        return service.save(accounts);
     }
     @GetMapping("/get/{id}")
     public Accounts getAccount(@PathVariable String id){
