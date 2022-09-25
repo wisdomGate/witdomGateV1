@@ -1,6 +1,7 @@
 package com.sa.accounts.service;
 
 import com.sa.accounts.Dto.Conversation;
+import com.sa.accounts.Dto.OwnerDTO;
 import com.sa.accounts.MailDTO;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
@@ -125,4 +126,13 @@ public class AccountService {
        return "followed";
     }
 
+    public OwnerDTO getOwner(String id) {
+        Accounts accounts=repo.findById(id).orElse(null);
+        OwnerDTO dto=new OwnerDTO();
+        assert accounts != null;
+        dto.setOwnerId(accounts.getId());
+        dto.setOwnerFristName(accounts.getFirstName());
+        dto.setOwnerLastName(accounts.getLastName());
+        return dto;
+    }
 }

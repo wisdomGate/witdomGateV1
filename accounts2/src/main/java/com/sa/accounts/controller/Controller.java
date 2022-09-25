@@ -1,5 +1,6 @@
 package com.sa.accounts.controller;
 
+import com.sa.accounts.Dto.OwnerDTO;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
 import com.sa.accounts.service.AccountService;
@@ -31,6 +32,10 @@ public class Controller {
 //            repo.insert(accounts);
 //        });
         return service.save(accounts);
+    }
+    @GetMapping("/getOwner/{id}")
+    public OwnerDTO getOwner(@PathVariable String id){
+        return service.getOwner(id);
     }
     @GetMapping("/get/{id}")
     public Accounts getAccount(@PathVariable String id){
