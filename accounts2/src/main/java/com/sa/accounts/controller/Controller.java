@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 //@RequiredArgsConstructor
+@RequestMapping("/api/account")
 public class Controller {
     @Autowired
     private AccountService service;

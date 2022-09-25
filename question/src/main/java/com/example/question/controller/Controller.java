@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/question")
 public class Controller {
     @Autowired
     private QuestionService service;
