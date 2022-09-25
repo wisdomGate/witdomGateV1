@@ -1,15 +1,19 @@
 package com.example.question.service;
 
-import com.example.question.DTO.OwnerDTO;
-import com.example.question.DTO.QuestionDTO;
+import com.example.question.DTO.*;
 import com.example.question.model.Question;
 import com.example.question.repository.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -60,5 +64,44 @@ public class QuestionService {
                 break;
         }
         return dtos;
+    }
+
+    public List<SolutionDTO> getsolution(String id){
+        SolResponse solutions= restTemplate.getForObject("http://localhost:8081/getSolution/"+id,SolResponse.class);
+        List<SolutionDTO> dtos=new ArrayList<>();
+        int i=0;
+        assert solutions != null;
+        for(Solution s:solutions.getSolutions()){
+            OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/getOwner/"+s.getOwner_id(),OwnerDTO.class);
+            SolutionDTO dto=new SolutionDTO();
+            dto.setOwner(ownerDTO);
+            dto.setSolution(s);
+            dtos.add(dto);
+            if(i==20)
+                break;
+            i++;
+        }
+        return dtos;
+    }
+
+    public ResponseEntity<Solution> addSolution(Solution solution) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Solution> requestEntity =
+                new HttpEntity<>(solution, headers);
+        ResponseEntity<Solution> str;
+        str = restTemplate.postForEntity("http://localhost:8081/add",requestEntity,Solution.class);
+        return str;
+    }
+
+    public Boolean addsolutionVote(String id, String v_id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Solution> requestEntity =
+                new HttpEntity<>(null, headers);
+        Boolean response=restTemplate.postForObject("http://localhost:8081/vote/"+id+"/"+v_id,requestEntity,Boolean.class);
+        return response;
     }
 }

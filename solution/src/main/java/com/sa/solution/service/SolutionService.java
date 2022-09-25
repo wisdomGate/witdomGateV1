@@ -1,9 +1,12 @@
 package com.sa.solution.service;
 
+import com.sa.solution.SolResponse;
 import com.sa.solution.model.Solution;
 import com.sa.solution.repository.SolutionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,5 +40,15 @@ public class SolutionService {
         solution.setUpvote(accounts);
         repo.save(solution);
         return status;
+    }
+
+
+    public SolResponse getAll(String id) {
+        SolResponse response=new SolResponse();
+        Query query=new Query();
+        query.addCriteria(Criteria.where("question_id").is(id));
+        List<Solution> solutions=template.find(query,Solution.class);
+        response.setSolutions(solutions);
+        return response;
     }
 }
