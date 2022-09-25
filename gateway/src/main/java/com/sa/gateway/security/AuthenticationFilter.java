@@ -2,8 +2,8 @@ package com.sa.gateway.security;
 
 
 
-import com.example.gatewayservice.config.JwtConfig;
-import com.example.gatewayservice.models.ErrorResponseDto;
+import com.sa.gateway.config.JwtConfig;
+import com.sa.gateway.models.ErrorResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;

@@ -3,10 +3,10 @@ package com.sa.gateway.security;
 import java.util.Date;
 
 
-import com.example.gatewayservice.config.JwtConfig;
-import com.example.gatewayservice.exception.JwtTokenIncorrectStructureException;
-import com.example.gatewayservice.exception.JwtTokenMalformedException;
-import com.example.gatewayservice.exception.JwtTokenMissingException;
+import com.sa.gateway.config.JwtConfig;
+import com.sa.gateway.exception.JwtTokenIncorrectStructureException;
+import com.sa.gateway.exception.JwtTokenMalformedException;
+import com.sa.gateway.exception.JwtTokenMissingException;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class JwtTokenUtil {
     public String generateToken(String id) {
         Claims claims = Jwts.claims().setSubject(id);
         long nowMillis = System.currentTimeMillis();
-        long expMillis = nowMillis + config.getValidity() * 1000 * 60;
+        long expMillis = nowMillis + config.getValidity() * 1000 * 200;
         Date exp = new Date(expMillis);
 
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(nowMillis)).setExpiration(exp)

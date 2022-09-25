@@ -1,6 +1,7 @@
 package com.sa.blog.service;
 
 import com.sa.blog.BlogResponse;
+import com.sa.blog.DTO.PaymentRequest;
 import com.sa.blog.model.Blog;
 import com.sa.blog.model.Comment;
 import com.sa.blog.repository.BlogRepo;
@@ -9,8 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,6 +28,8 @@ public class BlogService {
     private CommentRepo commentRepo;
     @Autowired
     private MongoTemplate template;
+    @Autowired
+    private RestTemplate restTemplate;
     public Blog add(Blog blog){
         return repo.save(blog);
     }
@@ -50,5 +59,18 @@ public class BlogService {
     }
     public List<Blog> getAllBlogs(){
         return repo.findAll();
+    }
+
+    public ResponseEntity<String> makePayment(PaymentRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+//        Conversation conversation=new Conversation();
+//        conversation.setMembers(Arrays.asList(follower,followed));
+
+        HttpEntity<PaymentRequest> requestEntity =
+                new HttpEntity<>(request, headers);
+        ResponseEntity<String> str=restTemplate.postForEntity("http://localhost:8085/api/payment/make",requestEntity, String.class);
+        return str;
     }
 }

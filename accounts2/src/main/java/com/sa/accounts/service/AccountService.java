@@ -84,7 +84,7 @@ public class AccountService {
         if(owner.getFollowings()!=null){
             acc=owner.getFollowings();
             if(acc.contains(followed)){
-                restTemplate.delete("http://localhost:8083/delete/"+followed+"/"+follower);
+                restTemplate.delete("http://localhost:8083/api/chatroom/delete/"+followed+"/"+follower);
                 acc.remove(followed);
             }
             else{
@@ -96,7 +96,7 @@ public class AccountService {
 
                 HttpEntity<Conversation> requestEntity =
                         new HttpEntity<>(conversation, headers);
-                restTemplate.postForEntity("http://localhost:8083/addConvesrsation",requestEntity, Conversation.class);
+                restTemplate.postForEntity("http://localhost:8083/api/chatroom/addConvesrsation",requestEntity, Conversation.class);
                 acc.add(followed);
             }
 

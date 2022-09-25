@@ -1,6 +1,7 @@
 package com.example.question.controller;
 
 import com.example.question.DTO.QuestionDTO;
+import com.example.question.DTO.RequestDTO;
 import com.example.question.DTO.Solution;
 import com.example.question.DTO.SolutionDTO;
 import com.example.question.model.Question;
@@ -28,9 +29,9 @@ public class Controller {
     public List<QuestionDTO> getQuestions(){
         return service.getAllQuestions();
     }
-    @GetMapping("/getsolutions/{id}")
-    public List<SolutionDTO> getSolution(@PathVariable String id){
-        return service.getsolution(id);
+    @GetMapping("/getsolutions")
+    public List<SolutionDTO> getSolution(@RequestBody RequestDTO id){
+        return service.getsolution(id.getId());
     }
 
     @PostMapping("/addSolution")
