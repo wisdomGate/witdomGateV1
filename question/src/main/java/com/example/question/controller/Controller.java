@@ -22,16 +22,21 @@ public class Controller {
         return service.add(question);
     }
     @PostMapping("/vote/{q_id}/{voter_id}")
-    public Boolean vote(@PathVariable String q_id,@PathVariable String voter_id){
-        return service.vote(q_id,voter_id);
+    public String vote(@PathVariable String q_id,@PathVariable String voter_id){
+        String str=service.vote(q_id,voter_id)?"true":"false";
+        return str;
     }
     @GetMapping("/getall")
     public List<QuestionDTO> getQuestions(){
         return service.getAllQuestions();
     }
-    @GetMapping("/getsolutions")
+    @PostMapping("/getsolutions")
     public List<SolutionDTO> getSolution(@RequestBody RequestDTO id){
+        System.out.println(id.getId());
         return service.getsolution(id.getId());
+    }
+    public List<QuestionDTO> getPersonal(String id){
+        return service.personal(id);
     }
 
     @PostMapping("/addSolution")
@@ -39,8 +44,8 @@ public class Controller {
         return service.addSolution(solution);
     }
     @PostMapping("/solutionVote/{id}/{q_id}")
-    public Boolean goteSolution(@PathVariable String id, @PathVariable String q_id){
-        return service.addsolutionVote(id,q_id);
+    public String goteSolution(@PathVariable String id, @PathVariable String q_id){
+        return service.addsolutionVote(id,q_id)?"true":"false";
     }
 
 }

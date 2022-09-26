@@ -24,7 +24,7 @@ public class Controller {
     private AccountRepo repo;
 
     @PostMapping("/add")
-    public Accounts saveAccount(@RequestBody Accounts accounts){
+    public String saveAccount(@RequestBody Accounts accounts){
 //        repo.findAccountsByEmail(accounts.getEmail()).ifPresentOrElse(a->{
 //            System.out.println("email already exist");
 //
@@ -32,7 +32,9 @@ public class Controller {
 //            System.out.println("inserted");
 //            repo.insert(accounts);
 //        });
-        return service.save(accounts);
+        Accounts acc=service.save(accounts);
+        String status=acc!=null?"true":"flase";
+        return status;
     }
     @GetMapping("/getOwner/{id}")
     public OwnerDTO getOwner(@PathVariable String id){
@@ -51,7 +53,7 @@ public class Controller {
         return service.follow(id,f);
     }
     @GetMapping("/authenticate/{username}/{password}")
-    public Boolean authenticate(@PathVariable String username,@PathVariable String password){
+    public Accounts authenticate(@PathVariable String username,@PathVariable String password){
         return service.authenticate(username,password);
     }
     @GetMapping("/getFollers/{id}")

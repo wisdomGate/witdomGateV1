@@ -10,4 +10,5 @@ import lombok.Setter;
 public class AuthenticationStatus {
     private Boolean isAuthenticated;
     private String message;
+    private AuthenticationResponse user;
 }

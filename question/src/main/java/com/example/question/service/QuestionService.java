@@ -5,6 +5,8 @@ import com.example.question.model.Question;
 import com.example.question.repository.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -72,16 +74,17 @@ public class QuestionService {
         List<SolutionDTO> dtos=new ArrayList<>();
         int i=0;
         assert solutions != null;
-        for(Solution s:solutions.getSolutions()){
+        for(Solution s:solutions.getQuestion()){
             OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/api/account/getOwner/"+s.getOwner_id(),OwnerDTO.class);
             SolutionDTO dto=new SolutionDTO();
             dto.setOwner(ownerDTO);
-            dto.setSolution(s);
+            dto.setQuestion(s);
             dtos.add(dto);
             if(i==20)
                 break;
             i++;
         }
+        System.out.println(dtos.get(0).getQuestion().getContent());
         return dtos;
     }
 
@@ -104,5 +107,27 @@ public class QuestionService {
                 new HttpEntity<>(null, headers);
         Boolean response=restTemplate.postForObject("http://localhost:8081/vote/"+id+"/"+v_id,requestEntity,Boolean.class);
         return response;
+    }
+
+    public List<QuestionDTO> personal(String id) {
+        Query query=new Query();
+        query.addCriteria(Criteria.where("owner_id").is(id));
+        List<Question> questions=template.find(query,Question.class);
+        List<QuestionDTO> dtos=new ArrayList<>();
+        int i=0;
+        for(Question q:questions){
+            OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/api/account/getOwner/"+id,OwnerDTO.class);
+            QuestionDTO dto=new QuestionDTO();
+            //System.out.println(ownerDTO.getOwner_fristName());
+            dto.setOwner(ownerDTO);
+            dto.setQuestion(q);
+            dtos.add(dto);
+            i++;
+            if(i==50)
+                break;
+        }
+        return dtos;
+
+
     }
 }

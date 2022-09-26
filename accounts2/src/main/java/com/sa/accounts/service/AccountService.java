@@ -1,5 +1,6 @@
 package com.sa.accounts.service;
 
+import com.sa.accounts.Dto.AuthenticationResponse;
 import com.sa.accounts.Dto.Conversation;
 import com.sa.accounts.Dto.OwnerDTO;
 import com.sa.accounts.MailDTO;
@@ -39,11 +40,17 @@ public class AccountService {
         template.save(accounts1);
         return "success";
     }
-    public Boolean authenticate(String username,String password){
+    public Accounts authenticate(String username,String password){
         Query query=new Query();
         query.addCriteria(Criteria.where("email").is(username ));
         Accounts accounts1=template.findOne(query,Accounts.class);
-        return accounts1.getPassword().equals(password);
+        //AuthenticationResponse response=new AuthenticationResponse();
+        //response=(AuthenticationResponse) accounts1;
+        if(accounts1.getPassword().equals(password)){
+            accounts1.setPassword(null);
+            return accounts1;
+        }
+        return null;
     }
     public Integer getnumberofFollowers(String id){
         Accounts accounts=repo.findById(id).orElse(null);

@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolResponse {
-    private List<Solution> solutions;
+    private List<Solution> question;
 }

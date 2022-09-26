@@ -1,27 +1,16 @@
-package com.sa.accounts.entity;
+package com.sa.gateway.models;
 
-import jdk.jfr.Timestamp;
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Document
-public class Accounts {
-    @Id
+public class AuthenticationResponse {
     private String id;
     private String firstName;
     private String LastName;
-    @Indexed(unique = true)
     private String email;
     private String password;
     private List<String> followers;
@@ -30,5 +19,4 @@ public class Accounts {
     private Address address;
     private List<Category> categories;
     private LocalDateTime createdAt=LocalDateTime.now();
-
 }

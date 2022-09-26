@@ -48,7 +48,7 @@ public class SolutionService {
         Query query=new Query();
         query.addCriteria(Criteria.where("question_id").is(id));
         List<Solution> solutions=template.find(query,Solution.class);
-        response.setSolutions(solutions);
+        response.setQuestion(solutions);
         return response;
     }
 }

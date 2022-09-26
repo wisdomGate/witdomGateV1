@@ -6,18 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.sa.gateway.models.AuthenticationStatus;
-import com.sa.gateway.models.ErrorResponseDto;
-import com.sa.gateway.models.JwtRequest;
-import com.sa.gateway.models.JwtResponse;
+import com.sa.gateway.models.*;
 import com.sa.gateway.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -32,6 +26,7 @@ public class JwtAuthenticationController {
     public JwtAuthenticationController(JwtTokenUtil jwtTokenUtil) {
         this.jwtTokenUtil = jwtTokenUtil;
     }
+    @CrossOrigin(value = "http://localhost:3000")
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
         AuthenticationStatus status = authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -44,18 +39,18 @@ public class JwtAuthenticationController {
         }
 
         final String token = jwtTokenUtil.generateToken(authenticationRequest.getUsername());
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token,status.getUser()));
     }
 
     private AuthenticationStatus authenticate(String username, String password) {
         AuthenticationStatus status;
-        Boolean response=template.getForObject("http://localhost:8080/api/account/authenticate/"+username+"/"+password,Boolean.class);
+        AuthenticationResponse response=template.getForObject("http://localhost:8080/api/account/authenticate/"+username+"/"+password,AuthenticationResponse.class);
         //boolean condition= response.equals("true");
-        if (!response) {
-            status = new AuthenticationStatus(false, "Invalid Username/Password");
+        if (response==null) {
+            status = new AuthenticationStatus(false, "Invalid Username/Password",null);
         }
         else {
-            status = new AuthenticationStatus(true, "Authentication Successful");
+            status = new AuthenticationStatus(true, "Authentication Successful",response);
         }
 
         return status;
