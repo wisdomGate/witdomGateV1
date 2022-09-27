@@ -59,4 +59,7 @@ public class PaymentService {
     public String make(){
         return "true";
     }
+    public Boolean sendnotification(String email){
+        return true;
+    }
 }
