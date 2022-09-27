@@ -35,10 +35,10 @@ public class SolutionService {
                 accounts.add(voter_id);
             }else
                 accounts.remove(voter_id);
-
+            solution.setUpvote(accounts);
+            repo.save(solution);
         }
-        solution.setUpvote(accounts);
-        repo.save(solution);
+
         return status;
     }
 
@@ -48,7 +48,9 @@ public class SolutionService {
         Query query=new Query();
         query.addCriteria(Criteria.where("question_id").is(id));
         List<Solution> solutions=template.find(query,Solution.class);
+
         response.setQuestion(solutions);
+        //System.out.println(response.getSolutions().get(0));
         return response;
     }
 }

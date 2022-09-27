@@ -20,6 +20,7 @@ public class Controller {
     }
     @GetMapping("/getSolution/{id}")
     public SolResponse getall(@PathVariable String id){
+        System.out.println(id);
         return service.getAll(id);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 @Data
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Solution {
     private String content;
     private String question_id;
     private String owner_id;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt=new Date();
     private List<String> upvote;
 
 }
