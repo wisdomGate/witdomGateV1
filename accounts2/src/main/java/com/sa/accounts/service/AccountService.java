@@ -40,6 +40,9 @@ public class AccountService {
         template.save(accounts1);
         return "success";
     }
+    public List<Accounts> getAll(){
+        return repo.findAll();
+    }
     public Accounts authenticate(String username,String password){
         Query query=new Query();
         query.addCriteria(Criteria.where("email").is(username ));
@@ -54,8 +57,10 @@ public class AccountService {
     }
     public Integer getnumberofFollowers(String id){
         Accounts accounts=repo.findById(id).orElse(null);
-        assert accounts!=null;
-        return accounts.getFollowers().size();
+        if(accounts==null)
+            return 0;
+        else
+            return accounts.getFollowers().size();
 
     }
     public Accounts save(Accounts accounts){
