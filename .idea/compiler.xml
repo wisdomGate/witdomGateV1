@@ -9,8 +9,8 @@
         <module name="question" />
         <module name="MailNotification" />
         <module name="blog" />
-        <module name="creditcard" />
         <module name="chat_room" />
+        <module name="creditcard" />
         <module name="notifcation" />
         <module name="search" />
         <module name="bank" />
@@ -37,6 +37,7 @@
       <module name="bank" options="-parameters" />
       <module name="blog" options="-parameters" />
       <module name="chat_room" options="-parameters" />
+      <module name="creditcard" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="payment2" options="-parameters" />
       <module name="paypal" options="-parameters" />
