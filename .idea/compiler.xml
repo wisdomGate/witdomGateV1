@@ -39,6 +39,7 @@
       <module name="chat_room" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="payment2" options="-parameters" />
+      <module name="paypal" options="-parameters" />
       <module name="question" options="-parameters" />
       <module name="solution" options="-parameters" />
     </option>

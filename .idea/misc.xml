@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/solution/pom.xml" />
         <option value="$PROJECT_DIR$/MailNotification/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/paypal/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
