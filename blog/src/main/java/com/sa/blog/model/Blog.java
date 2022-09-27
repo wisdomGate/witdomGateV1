@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +19,5 @@ public class Blog {
     private String owner_id;
     private String title;
     private String content;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt=new Date();
 }

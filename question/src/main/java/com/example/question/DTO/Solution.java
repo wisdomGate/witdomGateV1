@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 @Data
 @NoArgsConstructor
@@ -14,6 +15,6 @@ public class Solution {
     private String content;
     private String question_id;
     private String owner_id;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt;
     private List<String> upvote;
 }

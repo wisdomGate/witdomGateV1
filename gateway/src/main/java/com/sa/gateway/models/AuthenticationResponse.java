@@ -4,6 +4,7 @@ package com.sa.gateway.models;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,5 +19,5 @@ public class AuthenticationResponse {
     private Gender gender;
     private Address address;
     private List<Category> categories;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt;
 }

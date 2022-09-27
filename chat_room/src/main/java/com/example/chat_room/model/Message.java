@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,5 +20,5 @@ public class Message {
     private String con_id;
     private String sender;
     private String content;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt;
 }

@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,11 +25,11 @@ public class Accounts {
     @Indexed(unique = true)
     private String email;
     private String password;
-    private List<String> followers;
-    private List<String> followings;
+    private List<String> followers=new ArrayList<>();
+    private List<String> followings=new ArrayList<>();
     private Gender gender;
     private Address address;
     private List<Category> categories;
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private Date createdAt=new Date();
 
 }

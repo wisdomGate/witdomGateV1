@@ -50,6 +50,7 @@ public class Controller {
     }
     @PostMapping("/follow/{id}/{f}")
     public String follow(@PathVariable String id, @PathVariable String f){
+        System.out.println(id+"  "+f);
         return service.follow(id,f);
     }
     @GetMapping("/authenticate/{username}/{password}")

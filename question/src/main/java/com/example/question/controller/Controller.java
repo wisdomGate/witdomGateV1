@@ -35,7 +35,8 @@ public class Controller {
         System.out.println(id.getId());
         return service.getsolution(id.getId());
     }
-    public List<QuestionDTO> getPersonal(String id){
+    @GetMapping("/getPersonal/{id}")
+    public List<QuestionDTO> getPersonal(@PathVariable String id){
         return service.personal(id);
     }
 
