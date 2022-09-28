@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.jms.core.JmsTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,8 +27,6 @@ import java.util.List;
 public class AccountService {
     @Autowired
     private AccountRepo repo;
-    @Autowired
-    private JmsTemplate jmsTemplate;
     @Autowired
     private MongoTemplate template;
 
@@ -59,12 +57,7 @@ public class AccountService {
         }
         return null;
     }
-//    @Value(value = "${springjms.safinal}")
-//    String jsmQueue;
-    public void  sendMail(MailDTO mailDTO){
-        jmsTemplate.send(session -> session.createObjectMessage((Serializable) mailDTO));
 
-    }
     public Integer getnumberofFollowers(String id){
         Accounts accounts=repo.findById(id).orElse(null);
         if(accounts==null)
@@ -84,17 +77,17 @@ public class AccountService {
             mailDTO.setSubject("Account verification from WisdomGate \"don't  reply to this email!!\"");
             mailDTO.setTo(accounts.getEmail());
 
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//            headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//
-//            HttpEntity<MailDTO> requestEntity =
-//                    new HttpEntity<>(mailDTO, headers);
-//            ResponseEntity<String> str;
-//            str = restTemplate.postForEntity("http://localhost:8084/sendMail",requestEntity,String.class);
-//            System.out.println(str);
-            sendMail(mailDTO);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+
+            HttpEntity<MailDTO> requestEntity =
+                    new HttpEntity<>(mailDTO, headers);
+            ResponseEntity<String> str;
+            str = restTemplate.postForEntity("http://localhost:8084/sendMail",requestEntity,String.class);
+            System.out.println(str);
+            //sendMail(mailDTO);
             return repo.save(accounts);
         }
 

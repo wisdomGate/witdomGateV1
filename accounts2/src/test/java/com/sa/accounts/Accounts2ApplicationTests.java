@@ -1,5 +1,8 @@
 package com.sa.accounts;
 
+import com.sa.accounts.Dto.AuthenticationResponse;
+import com.sa.accounts.Dto.Conversation;
+import com.sa.accounts.Dto.OwnerDTO;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
 import com.sa.accounts.service.AccountService;
@@ -30,6 +33,8 @@ class Accounts2ApplicationTests {
             ,new Accounts(null,"nahom","negash","nahom@gmail.com","123",null,null,null,null,null,new Date()));
     @Test
     public void getallusersTest(){
+
+        Conversation conversation=new Conversation();
         when(repo.findAll()).thenReturn(accountsList);
 //        assertEqual
         boolean expected=service.getAll().size()==2;
@@ -37,6 +42,7 @@ class Accounts2ApplicationTests {
     }
     @Test
     public void authenticate(){
+        AuthenticationResponse response=new AuthenticationResponse();
         Accounts accounts=service.authenticate("bhbbereket5@gmail.com","123");
         Boolean expected=accounts!=null;
         assertThat(expected).isTrue();
@@ -46,6 +52,12 @@ class Accounts2ApplicationTests {
         int x=service.getnumberofFollowers("6332fc25db884760ba1f9536");
         Boolean expected= x==0;
         assertThat(expected).isTrue();
+    }
+    @Test
+    public void Search(){
+        OwnerDTO dto=new OwnerDTO();
+        ResponseDTO responseDTO=new ResponseDTO();
+        assertThat(null==service.search("seytan")).isFalse();
     }
 
 

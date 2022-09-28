@@ -11,7 +11,6 @@
         <module name="blog" />
         <module name="chat_room" />
         <module name="creditcard" />
-        <module name="notifcation" />
         <module name="bank" />
         <module name="search" />
         <module name="solution" />
@@ -26,6 +25,7 @@
       <module name="bank" target="17" />
       <module name="chatroom" target="18" />
       <module name="discovery" target="18" />
+      <module name="notifcation" target="18" />
       <module name="payment2" target="17" />
       <module name="search" target="17" />
       <module name="solution" target="17" />

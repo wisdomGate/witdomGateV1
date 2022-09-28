@@ -1,5 +1,7 @@
 package com.sa.blog;
 
+import com.sa.blog.DTO.PaymentRequest;
+import com.sa.blog.DTO.RequestDTO;
 import com.sa.blog.model.Blog;
 import com.sa.blog.model.Comment;
 import com.sa.blog.repository.CommentRepo;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +44,9 @@ class BlogApplicationTests {
     public void getblog(){
         BlogResponse blog= service.getBlog("6332fc25db884760ba1f9536");
         BlogResponse expected=null;
+        ResponseDTO responseDTO=new ResponseDTO();
+        PaymentRequest request=new PaymentRequest();
+        RequestDTO requestDTO=new RequestDTO();
         assertThat(expected==blog).isFalse();
     }
     @Test
@@ -53,6 +59,10 @@ class BlogApplicationTests {
     public void getAllComments(){
         List<Comment> comments= service.getAllComments();
         assertThat(null!=comments).isTrue();
+    }
+    @Test
+    public void Search(){
+        assertThat(null==service.search("seytan")).isFalse();
     }
 
 }

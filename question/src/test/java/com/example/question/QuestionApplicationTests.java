@@ -34,7 +34,7 @@ class QuestionApplicationTests {
     }
     @Test
     public void getAllQuestion(){
-        assertThat(null==service.getAllQuestions()).isTrue();
+        assertThat(null==service.getAllQuestions()).isFalse();
     }
     @Test
     public void getAllSolutions(){
@@ -64,7 +64,10 @@ class QuestionApplicationTests {
         Solution question=new Solution(null,content,id,owner_id,createdAt,upvote);
         assertThat(null==service.addSolution(question)).isTrue();
     }
-
+    @Test
+    public void Search(){
+        assertThat(null==service.search("seytan")).isFalse();
+    }
 
 
 
