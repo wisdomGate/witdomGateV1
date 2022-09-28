@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -15,6 +16,7 @@
         <module name="search" />
         <module name="bank" />
         <module name="solution" />
+        <module name="accounts2" />
         <module name="payment" />
         <module name="accounts" />
         <module name="paypal" />
@@ -34,11 +36,13 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MailNotification" options="-parameters" />
       <module name="accounts" options="-parameters" />
+      <module name="accounts2" options="-parameters" />
       <module name="bank" options="-parameters" />
       <module name="blog" options="-parameters" />
       <module name="chat_room" options="-parameters" />
       <module name="creditcard" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="payment" options="-parameters" />
       <module name="payment2" options="-parameters" />
       <module name="paypal" options="-parameters" />
       <module name="question" options="-parameters" />
