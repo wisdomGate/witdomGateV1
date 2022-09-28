@@ -1,6 +1,10 @@
 server:
   port: 8084
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: Mail-Service
   mail:
     host: smtp.gmail.com
     port: 587
@@ -12,3 +16,11 @@ spring:
           auth: true
           starttls:
             enable: true
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+  spring:
+    web:
+      client:
+        enabled: true
+      enabled: true

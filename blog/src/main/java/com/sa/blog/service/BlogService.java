@@ -70,7 +70,7 @@ public class BlogService {
 
         HttpEntity<PaymentRequest> requestEntity =
                 new HttpEntity<>(request, headers);
-        ResponseEntity<String> str=restTemplate.postForEntity("http://localhost:8085/api/payment/make",requestEntity, String.class);
+        ResponseEntity<String> str=restTemplate.postForEntity("http://payment-service:8085/api/payment/make",requestEntity, String.class);
         return str;
     }
 }

@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-deployment
+  labels:
+    app: blog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog
+        image: leonahoms/finalblog
+        ports:
+        - containerPort: 8082
+        env:
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: blogdb-secret
+              key: mongo-user
+        - name: USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: blogdb-secret
+              key: mongo-password 
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: blogdb-config
+              key: mongo-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: blog
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8082
+#      nodePort: 30101
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: blog-destination
+spec:
+  host: blog-service
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 1
+      http:
+        http1MaxPendingRequests: 1
+        maxRequestsPerConnection: 1
+    outlierDetection:
+      consecutive5xxErrors: 1
+      interval: 1s
+      baseEjectionTime: 3m
+      maxEjectionPercent: 100
+---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: blog-service
+#  annotations:
+#    kubernetes.io/ingress.target: /
+#spec:
+#  ingressClassName: nginx-example
+#  rules:
+#    - host: blog-service.ff4c99370ad645e4812a.eastus.aksapp.io
+#      http:
+#          paths:
+#            - path: /
+#              pathType: Prefix
+#              backend:
+#                service:
+#                  name: blog-service
+#                  port:
+#                    number: 8082

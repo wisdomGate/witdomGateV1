@@ -2,10 +2,25 @@ server:
   port: 8082
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   data:
     mongodb:
       database: BlogDB
-      host: localhost
+      host: ${DB_URL:localhost}
+      username: ${USER_NAME}
+      password: ${USER_PWD}
+      authentication-database: admin
       port: 27017
   application:
     name: Blog-Service
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+  spring:
+    web:
+      client:
+        enabled: true
+      enabled: true
+
+

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-deployment
+  labels:
+    app: question
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: question
+  template:
+    metadata:
+      labels:
+        app: question
+    spec:
+      containers:
+        - name: question
+          image: leonahoms/finalquestion
+          ports:
+            - containerPort: 9090
+          env:
+            - name: USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: questiondb-secret
+                  key: mongo-user
+            - name: USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: questiondb-secret
+                  key: mongo-password
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: questiondb-config
+                  key: mongo-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-service
+spec:
+  type: NodePort
+  selector:
+    app: question
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+      nodePort: 30102

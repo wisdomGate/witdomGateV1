@@ -75,7 +75,7 @@ public class AccountService {
             HttpEntity<MailDTO> requestEntity =
                     new HttpEntity<>(mailDTO, headers);
             ResponseEntity<String> str;
-            str = restTemplate.postForEntity("http://localhost:8084/sendMail",requestEntity,String.class);
+            str = restTemplate.postForEntity("http://mail-service:8084/sendMail",requestEntity,String.class);
             System.out.println(str);
             return repo.save(accounts);
         }

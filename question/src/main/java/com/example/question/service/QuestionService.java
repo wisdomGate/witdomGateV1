@@ -55,7 +55,7 @@ public class QuestionService {
         List<QuestionDTO> dtos=new ArrayList<>();
         int i=0;
         for(Question q:questions){
-            OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/api/account/getOwner/"+q.getOwner_id(),OwnerDTO.class);
+            OwnerDTO ownerDTO=restTemplate.getForObject("http://account-service:8080/api/account/getOwner/"+q.getOwner_id(),OwnerDTO.class);
             QuestionDTO dto=new QuestionDTO();
             //System.out.println(ownerDTO.getOwner_fristName());
             dto.setOwner(ownerDTO);
@@ -116,7 +116,7 @@ public class QuestionService {
         List<QuestionDTO> dtos=new ArrayList<>();
         int i=0;
         for(Question q:questions){
-            OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/api/account/getOwner/"+id,OwnerDTO.class);
+            OwnerDTO ownerDTO=restTemplate.getForObject("http://account-service:8080/api/account/getOwner/"+id,OwnerDTO.class);
             QuestionDTO dto=new QuestionDTO();
             //System.out.println(ownerDTO.getOwner_fristName());
             dto.setOwner(ownerDTO);

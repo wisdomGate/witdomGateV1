@@ -52,7 +52,7 @@ public class PaymentService {
         HttpEntity<MailDTO> req =
                 new HttpEntity<>(mailDTO, headers);
         ResponseEntity<String> str;
-        str = restTemplate.postForEntity("http://localhost:8084/sendMail",req,String.class);
+        str = restTemplate.postForEntity("http://mail-service:8084/sendMail",req,String.class);
         //System.out.println(str.getBody());
         return response;
     }
