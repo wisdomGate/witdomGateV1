@@ -22,4 +22,7 @@ public class Service {
         System.out.println("mail sent");
 
     }
+    public String sendemail(String email){
+        return "true";
+    }
 }

@@ -43,7 +43,9 @@ public class BlogService {
         assert blog != null;
         return "Blog with title "+blog.getTitle()+"... deleted";
     }
-
+    public List<Comment> getAllComments(){
+        return commentRepo.findAll();
+    }
     public Comment add(Comment comment){
         return commentRepo.save(comment);
     }

@@ -43,14 +43,15 @@ public class QuestionService {
                 accounts.add(voter_id);
             }else
                 accounts.remove(voter_id);
-
+            question.setUpvote(accounts);
+            repo.save(question);
         }
-        question.setUpvote(accounts);
-        repo.save(question);
+
         return status;
     }
 
     public List<QuestionDTO> getAllQuestions() {
+        try{
         List<Question> questions=repo.findAll();
         List<QuestionDTO> dtos=new ArrayList<>();
         int i=0;
@@ -65,11 +66,14 @@ public class QuestionService {
             if(i==50)
                 break;
         }
-        return dtos;
+        return dtos;}catch (Exception e){
+            return null;
+        }
     }
 
     public List<SolutionDTO> getsolution(String id){
-        System.out.println(id);
+        //System.out.println(id);
+        try{
         SolResponse solutions= restTemplate.getForObject("http://localhost:8081/getSolution/"+id,SolResponse.class);
         List<SolutionDTO> dtos=new ArrayList<>();
         int i=0;
@@ -85,10 +89,13 @@ public class QuestionService {
             i++;
         }
         System.out.println(dtos.get(0).getQuestion().getContent());
-        return dtos;
+        return dtos;}catch (Exception e){
+            return null;
+        }
     }
 
     public ResponseEntity<Solution> addSolution(Solution solution) {
+        try{
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -96,7 +103,9 @@ public class QuestionService {
                 new HttpEntity<>(solution, headers);
         ResponseEntity<Solution> str;
         str = restTemplate.postForEntity("http://localhost:8081/add",requestEntity,Solution.class);
-        return str;
+        return str;}catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean addsolutionVote(String id, String v_id) {
@@ -105,11 +114,18 @@ public class QuestionService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Solution> requestEntity =
                 new HttpEntity<>(null, headers);
-        Boolean response=restTemplate.postForObject("http://localhost:8081/vote/"+id+"/"+v_id,requestEntity,Boolean.class);
-        return response;
+        try {
+            Boolean aBoolean = restTemplate.postForObject("http://localhost:8081/vote/" + id + "/" + v_id, requestEntity, Boolean.class);
+            return aBoolean;
+        }catch (Exception e){
+            return false;
+        }
+
+
     }
 
     public List<QuestionDTO> personal(String id) {
+        try{
         Query query=new Query();
         query.addCriteria(Criteria.where("owner_id").is(id));
         List<Question> questions=template.find(query,Question.class);
@@ -126,7 +142,9 @@ public class QuestionService {
             if(i==50)
                 break;
         }
-        return dtos;
+        return dtos;}catch (Exception e){
+            return null;
+        }
 
 
     }

@@ -56,4 +56,10 @@ public class PaymentService {
         //System.out.println(str.getBody());
         return response;
     }
+    public String make(){
+        return "true";
+    }
+    public Boolean sendnotification(String email){
+        return true;
+    }
 }
