@@ -1,6 +1,7 @@
 package com.sa.accounts.controller;
 
 import com.sa.accounts.Dto.OwnerDTO;
+import com.sa.accounts.ResponseDTO;
 import com.sa.accounts.entity.Accounts;
 import com.sa.accounts.repository.AccountRepo;
 import com.sa.accounts.service.AccountService;
@@ -60,6 +61,10 @@ public class Controller {
     @GetMapping("/getFollers/{id}")
     public Integer getFollowers(@PathVariable String id){
         return service.getnumberofFollowers(id);
+    }
+    @GetMapping("/search/{str}")
+    public ResponseDTO search(@PathVariable String str){
+        return service.search(str);
     }
 
 }

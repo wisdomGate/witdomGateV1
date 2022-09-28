@@ -2,6 +2,7 @@ package com.sa.blog.service;
 
 import com.sa.blog.BlogResponse;
 import com.sa.blog.DTO.PaymentRequest;
+import com.sa.blog.ResponseDTO;
 import com.sa.blog.model.Blog;
 import com.sa.blog.model.Comment;
 import com.sa.blog.repository.BlogRepo;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -74,5 +76,14 @@ public class BlogService {
                 new HttpEntity<>(request, headers);
         ResponseEntity<String> str=restTemplate.postForEntity("http://localhost:8085/api/payment/make",requestEntity, String.class);
         return str;
+    }
+    public ResponseDTO search(String str) {
+        Criteria criteria=new Criteria();
+        criteria.orOperator(Criteria.where("title").regex(str));
+        Query query=new Query(criteria);
+        List<Blog> blogs=template.find(query,Blog.class);
+        ResponseDTO dto=new ResponseDTO();
+        dto.setResponse(Collections.singletonList(blogs));
+        return dto;
     }
 }

@@ -12,8 +12,8 @@
         <module name="chat_room" />
         <module name="creditcard" />
         <module name="notifcation" />
-        <module name="search" />
         <module name="bank" />
+        <module name="search" />
         <module name="solution" />
         <module name="payment" />
         <module name="accounts" />
@@ -27,6 +27,7 @@
       <module name="chatroom" target="18" />
       <module name="discovery" target="18" />
       <module name="payment2" target="17" />
+      <module name="search" target="17" />
       <module name="solution" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -42,6 +43,7 @@
       <module name="payment2" options="-parameters" />
       <module name="paypal" options="-parameters" />
       <module name="question" options="-parameters" />
+      <module name="search" options="-parameters" />
       <module name="solution" options="-parameters" />
     </option>
   </component>

@@ -13,6 +13,9 @@ public interface AccountRepo extends MongoRepository<Accounts,String> {
     //@Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
 //    List<Accounts> findAll();
     Optional<Accounts> findAccountsByEmail(String email);
+    Accounts findAccountsByFirstName(String str);
+    @Query(value = "{$or: [{'firstName':?1},{'lastName': ?1}]}")
+    List<Accounts> findBySearch(String str);
 //    @Query(value = "{'_id=?0': {$push}}")
 //    void findAccountsById(String follower, String followed);
 }
