@@ -7,6 +7,7 @@ import com.sa.accounts.repository.AccountRepo;
 import com.sa.accounts.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -63,6 +64,7 @@ public class Controller {
         return service.getnumberofFollowers(id);
     }
     @GetMapping("/search/{str}")
+    @Cacheable(key = "#str",value = "Accounts")
     public ResponseDTO search(@PathVariable String str){
         return service.search(str);
     }

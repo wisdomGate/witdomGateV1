@@ -78,6 +78,7 @@ public class BlogService {
         return str;
     }
     public ResponseDTO search(String str) {
+        //System.out.println("from database");
         Criteria criteria=new Criteria();
         criteria.orOperator(Criteria.where("title").regex(str));
         Query query=new Query(criteria);

@@ -8,6 +8,7 @@ import com.sa.blog.model.Blog;
 import com.sa.blog.model.Comment;
 import com.sa.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,7 @@ public class Controller {
     }
 
     @GetMapping("/search/{str}")
+    @Cacheable(key = "#str",value = "Blog")
     public ResponseDTO search(@PathVariable String str){
         return service.search(str);
     }

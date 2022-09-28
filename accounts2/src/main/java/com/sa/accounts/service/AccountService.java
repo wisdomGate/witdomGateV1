@@ -162,6 +162,7 @@ public class AccountService {
     }
 
     public ResponseDTO search(String str) {
+        //System.out.println("from database");
         Criteria criteria=new Criteria();
         criteria.orOperator(Criteria.where("firstName").regex(str),Criteria.where("lastName").regex(str));
         Query query=new Query(criteria);

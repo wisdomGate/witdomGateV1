@@ -4,6 +4,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -19,6 +20,7 @@ import javax.jms.JMSException;
 
 @SpringBootApplication
 @EnableJms
+@EnableCaching
 public class Accounts2Application {
 
     public static void main(String[] args) {

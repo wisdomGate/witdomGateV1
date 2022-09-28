@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Document
-public class Accounts {
+public class Accounts implements Serializable {
     @Id
     private String id;
     private String firstName;

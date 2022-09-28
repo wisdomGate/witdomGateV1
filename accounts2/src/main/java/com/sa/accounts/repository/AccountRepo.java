@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface AccountRepo extends MongoRepository<Accounts,String> {
+    public static final String HASH_KEY = "Accounts";
     //@Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
 //    List<Accounts> findAll();
     Optional<Accounts> findAccountsByEmail(String email);
