@@ -4,6 +4,7 @@ import com.example.question.DTO.QuestionDTO;
 import com.example.question.DTO.RequestDTO;
 import com.example.question.DTO.Solution;
 import com.example.question.DTO.SolutionDTO;
+import com.example.question.ResponseDTO;
 import com.example.question.model.Question;
 import com.example.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,10 @@ public class Controller {
     @PostMapping("/solutionVote/{id}/{q_id}")
     public String goteSolution(@PathVariable String id, @PathVariable String q_id){
         return service.addsolutionVote(id,q_id)?"true":"false";
+    }
+    @GetMapping("/search/{str}")
+    public ResponseDTO search(@PathVariable String str){
+        return service.search(str);
     }
 
 }

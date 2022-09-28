@@ -4,5 +4,5 @@ server:
 
 spring:
   application:
-    name: BANK-SERVICE
+    name: PayPal-SERVICE
 

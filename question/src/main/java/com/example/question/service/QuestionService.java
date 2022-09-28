@@ -1,6 +1,7 @@
 package com.example.question.service;
 
 import com.example.question.DTO.*;
+import com.example.question.ResponseDTO;
 import com.example.question.model.Question;
 import com.example.question.repository.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -145,7 +147,27 @@ public class QuestionService {
         return dtos;}catch (Exception e){
             return null;
         }
-
-
+    }
+    public ResponseDTO search(String str) {
+        Criteria criteria=new Criteria();
+        criteria.orOperator(Criteria.where("content").regex(str));
+        Query query=new Query(criteria);
+        List<Question> questions=template.find(query,Question.class);
+        List<QuestionDTO> dtos=new ArrayList<>();
+        int i=0;
+        for(Question q:questions){
+            OwnerDTO ownerDTO=restTemplate.getForObject("http://localhost:8080/api/account/getOwner/"+q.getOwner_id(),OwnerDTO.class);
+            QuestionDTO dto=new QuestionDTO();
+            //System.out.println(ownerDTO.getOwner_fristName());
+            dto.setOwner(ownerDTO);
+            dto.setQuestion(q);
+            dtos.add(dto);
+            i++;
+            if(i==50)
+                break;
+        }
+        ResponseDTO dto=new ResponseDTO();
+        dto.setResponse(Collections.singletonList(dtos));
+        return dto;
     }
 }

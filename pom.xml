@@ -19,8 +19,8 @@
     <module>bank</module>
     <module>creditcard</module>
     <module>paypal</module>
-    <module>search</module>
     <module>gateway</module>
+    <module>search</module>
   </modules>
 
   <name>safinalproject</name>
