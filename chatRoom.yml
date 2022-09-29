@@ -1,0 +1,90 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: chat-deployment
+#  labels:
+#    app: chat
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: chat
+#  template:
+#    metadata:
+#      labels:
+#        app: chat
+#    spec:
+#      containers:
+#        - name: chat
+#          image: leonahoms/finalchat
+#          ports:
+#            - containerPort: 8083
+#          env:
+#            - name: USER_NAME
+#              valueFrom:
+#                secretKeyRef:
+#                  name: chatdb-secret
+#                  key: mongo-user
+#            - name: USER_PWD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: chatdb-secret
+#                  key: mongo-password
+#            - name: DB_URL
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: chatdb-config
+#                  key: mongo-url
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: chat-service
+#spec:
+#  type: ClusterIP
+#  selector:
+#    app: chat
+#  ports:
+#    - protocol: TCP
+#      port: 8083
+#      targetPort: 8083
+##      nodePort: 30101
+#---
+#apiVersion: networking.istio.io/v1alpha3
+#kind: DestinationRule
+#metadata:
+#  name: chat-destination
+#spec:
+#  host: chat-service
+#  trafficPolicy:
+#    connectionPool:
+#      tcp:
+#        maxConnections: 1
+#      http:
+#        http1MaxPendingRequests: 1
+#        maxRequestsPerConnection: 1
+#    outlierDetection:
+#      consecutive5xxErrors: 1
+#      interval: 1s
+#      baseEjectionTime: 3m
+#      maxEjectionPercent: 100
+---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: chat-service
+#  annotations:
+#    kubernetes.io/ingress.target: /
+#spec:
+#  ingressClassName: nginx-example
+#  rules:
+#    - host: chat-service.ff4c99370ad645e4812a.eastus.aksapp.io
+#      http:
+#          paths:
+#            - path: /
+#              pathType: Prefix
+#              backend:
+#                service:
+#                  name: chat-service
+#                  port:
+#                    number: 8083

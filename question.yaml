@@ -41,11 +41,10 @@ kind: Service
 metadata:
   name: question-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: question
   ports:
     - protocol: TCP
       port: 9090
       targetPort: 9090
-      nodePort: 30102

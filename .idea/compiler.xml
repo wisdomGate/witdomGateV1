@@ -46,6 +46,7 @@
       <module name="payment2" options="-parameters" />
       <module name="paypal" options="-parameters" />
       <module name="question" options="-parameters" />
+      <module name="search" options="" />
       <module name="solution" options="-parameters" />
     </option>
   </component>

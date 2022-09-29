@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chartdb-deployment
+  labels:
+    app: chartdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chartdb
+  template:
+    metadata:
+      labels:
+        app: chartdb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:5.0
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: chartdb-secret
+                  key: mongo-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: chartdb-secret
+                  key: mongo-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chartdb-service
+spec:
+  selector:
+    app: chartdb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chartdb-config
+data:
+  mongo-url: chartdb-service
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chartdb-secret
+type: Opaque
+data:
+  mongo-user: bW9uZ291c2Vy
+  mongo-password: bW9uZ29wYXNzd29yZA==

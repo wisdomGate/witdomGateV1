@@ -41,7 +41,7 @@ kind: Service
 metadata:
   name: blog-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: blog
   ports:
