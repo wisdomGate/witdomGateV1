@@ -1,0 +1,16 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: PAYMENT-SERVICE
+  main:
+    allow-bean-definition-overriding: true
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+  spring:
+    web:
+      client:
+        enabled: true
+      enabled: true

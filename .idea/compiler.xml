@@ -2,22 +2,51 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="notifcation" />
-        <module name="bank" />
-        <module name="search" />
         <module name="question" />
-        <module name="solution" />
-        <module name="chatroom" />
-        <module name="payment" />
+        <module name="MailNotification" />
         <module name="blog" />
+        <module name="chat_room" />
         <module name="creditcard" />
+        <module name="notifcation" />
+        <module name="search" />
+        <module name="bank" />
+        <module name="solution" />
+        <module name="accounts2" />
+        <module name="payment" />
+        <module name="accounts" />
         <module name="paypal" />
-        <module name="account" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="account" target="18" />
+      <module name="bank" target="17" />
+      <module name="chatroom" target="18" />
+      <module name="discovery" target="18" />
+      <module name="payment2" target="17" />
+      <module name="solution" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="MailNotification" options="-parameters" />
+      <module name="accounts" options="-parameters" />
+      <module name="accounts2" options="-parameters" />
+      <module name="bank" options="-parameters" />
+      <module name="blog" options="-parameters" />
+      <module name="chat_room" options="-parameters" />
+      <module name="creditcard" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="payment" options="-parameters" />
+      <module name="payment2" options="-parameters" />
+      <module name="paypal" options="-parameters" />
+      <module name="question" options="-parameters" />
+      <module name="solution" options="-parameters" />
+    </option>
   </component>
 </project>

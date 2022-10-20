@@ -1,0 +1,19 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      host: ${DB_URL:localhost}
+      port: 27017
+      database: AccountDB
+      auto-index-creation: true
+  application:
+    name: Account-Service
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+  spring:
+    web:
+      client:
+        enabled: true
+      enabled: true

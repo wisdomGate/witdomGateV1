@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/MailNotification/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/account/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/account/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accounts2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bank/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bank/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/chat_room/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chatroom/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/chatroom/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/creditcard/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/creditcard/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discovery/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notifcation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notifcation/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/paypal/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/paypal/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/question/src/main/java" charset="UTF-8" />

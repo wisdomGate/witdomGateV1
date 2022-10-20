@@ -1,0 +1,23 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: Question
+  data:
+    mongodb:
+      database: QuestionDB
+      host: ${DB_URL:localhost}
+      username: ${USER_NAME}
+      password: ${USER_PWD}
+      authentication-database: admin
+      port: 27017
+server:
+  port: 9090
+opentracing:
+  jaeger:
+    enable-b3-propagation: true
+  spring:
+    web:
+      client:
+        enabled: true
+      enabled: true

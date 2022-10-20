@@ -9,17 +9,18 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>account</module>
+    <module>accounts2</module>
     <module>notifcation</module>
     <module>question</module>
     <module>solution</module>
     <module>blog</module>
-    <module>chatroom</module>
+    <module>chat_room</module>
     <module>payment</module>
     <module>bank</module>
     <module>creditcard</module>
     <module>paypal</module>
     <module>search</module>
+    <module>gateway</module>
   </modules>
 
   <name>safinalproject</name>

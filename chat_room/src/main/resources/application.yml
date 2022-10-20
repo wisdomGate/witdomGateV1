@@ -1,0 +1,11 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: Conversation-service
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: ConversationDB
+
